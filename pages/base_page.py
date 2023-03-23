@@ -3,6 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from .locators import BasePageLocators
 import math
+
 class BasePage():
     def __init__(self, browser, url, timeout=20):
         self.browser = browser
@@ -42,6 +43,7 @@ class BasePage():
             return False
 
         return True
+    
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]
