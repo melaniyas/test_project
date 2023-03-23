@@ -4,7 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from .locators import BasePageLocators
 import math
 class BasePage():
-    def __init__(self,browser, url, timeout=10):
+    def __init__(self, browser, url, timeout=20):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
@@ -55,3 +55,7 @@ class BasePage():
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
