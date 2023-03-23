@@ -1,6 +1,7 @@
 from .locators import LoginPageLocators
 from .base_page import BasePage
 from .locators import ProductPageLocators
+
 class ProductPage(BasePage):
     def add_product_to_basket(self):
         btn_add_to_basket = self.browser.find_element(*ProductPageLocators.BTN_ADD_TO_BASKET)
@@ -17,8 +18,12 @@ class ProductPage(BasePage):
         price = self.browser.find_element(*ProductPageLocators.PRICE_PRODUCT).text
         price_in_alert = self.browser.find_element(*ProductPageLocators.PRICE_PRODUCT_IN_ALERT).text
         assert price == price_in_alert, "Prices don't match"
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_ALERT), "Success message is presented, but should not be"
 
-    # def send_answer_to_alert(self, x):
+    def should_disappeared_be_success_message(self):
+        assert self.is_disappeared(
+            *ProductPageLocators.SUCCESS_ALERT), "Success message is presented, but should not be"
 
 
 
